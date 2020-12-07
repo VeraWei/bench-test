@@ -1,0 +1,30 @@
+.content {
+    margin: 3em;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 3px;
+    box-shadow: 1px 1px #e8e5e0;
+    padding: 10px;
+}
+
+.ant-table-thead > tr > th{
+    color: #0d9c9f;
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+}
+
+
+.ant-table-tbody .ant-table-cell:nth-child(2n-1) {
+    color: #666;
+}
+
+.ant-table-tbody .ant-table-cell:nth-child(2n) {
+    color: black;
+    font-weight: bold;
+}
+
+.item:nth-child(2n) .ant-table-cell:nth-child(2n-1),
+.item:nth-child(2n) .ant-table-cell:nth-child(2n) {
+    color: #0d9c9f;
+}
