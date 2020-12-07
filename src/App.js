@@ -1,5 +1,5 @@
 import React from "react";
-import { Header }from "./features/header";
+import { Header } from "./features/header";
 import { Transactions } from "./features/transactions";
 import "./App.css";
 

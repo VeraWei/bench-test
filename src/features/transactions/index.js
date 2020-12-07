@@ -1,47 +1,48 @@
 import { Table, message } from "antd";
 import { useState, useEffect } from "react";
 import reqwest from "reqwest";
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 import "./index.css";
 
 export const Transactions = () => {
     const [data, setData] = useState([]);
-    const [ pagination, setPagination ] = useState({
+    const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 10,
     });
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const fetch = (params = {}) => {
         setLoading(true);
         reqwest({
             url: `https://resttest.bench.co/transactions/${params.pagination.current}.json`,
             crossOrigin: true,
-        }).then((data) => {
-
-            setData([...data.transactions]);
-            setLoading(false);
-            setPagination({
-                ...params.pagination,
-                current: data.page,
-                total:data.totalCount,
+        })
+            .then((data) => {
+                setData([...data.transactions]);
+                setLoading(false);
+                setPagination({
+                    ...params.pagination,
+                    current: data.page,
+                    total: data.totalCount,
+                });
+            })
+            .catch((error) => {
+                // error toast
+                message.error("Fetch data error");
+                throw new Error(error.statusText);
             });
-        }).catch((error)=> {
-            // error toast
-            message.error('Fetch data error');
-            throw(new Error(error.statusText))
-        });
     };
 
     useEffect(() => {
         // initial loading
-        fetch({pagination});
+        fetch({ pagination });
     }, []);
 
     // page changing handler
     const handleTableChange = (pagination) => {
         fetch({
-            pagination
+            pagination,
         });
     };
 
@@ -65,11 +66,11 @@ export const Transactions = () => {
         {
             title: "Amount",
             dataIndex: "Amount",
-            render: Amount => `$${Amount}`,
-            width: "10%"
+            render: (Amount) => `$${Amount}`,
+            width: "10%",
         },
     ];
-    
+
     return (
         <div className="content">
             <Table
